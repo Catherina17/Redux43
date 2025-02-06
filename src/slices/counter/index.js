@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { fetchCount } from "../../api/counterApi"
+import { fetchCount, fetchCountDecrement } from "../../api/counterApi"
 
 export const incrementAsync = createAsyncThunk(
     'counter/fetchCount',
@@ -12,7 +12,7 @@ export const incrementAsync = createAsyncThunk(
 export const decrementAsync = createAsyncThunk(
     'counter/fetchCountDecrement',
     async (amount) => {
-        const response = await fetchCount(-amount)
+        const response = await fetchCountDecrement(amount)
         return response.data
     }
 )
@@ -48,7 +48,7 @@ export const counterSlice = createSlice({
             })
             .addCase(decrementAsync.fulfilled, (state, action) => {
                 state.status = 'idle'
-                state.value += action.payload
+                state.value -= action.payload
             })
     }
 })

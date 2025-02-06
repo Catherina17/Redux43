@@ -7,32 +7,23 @@ export const Counter = () => {
     const dispatch = useDispatch()
 
     const [incrementAmount, setIncrementAmount] = useState('')
+    const [decrementAmount, setDecrementAmount] = useState('')
 
     const handleIncrement = () => {
-        const amount = Number(incrementAmount)
-        dispatch(incrementAsync(amount))
+        const incrementCount = Number(incrementAmount)
+        dispatch(incrementAsync(incrementCount))
+        setIncrementAmount('')
     }
 
     const handleDecrement = () => {
-        const amount = Number(incrementAmount)
-        dispatch(decrementAsync(amount))
+        const decrementCount = Number(decrementAmount)
+        dispatch(decrementAsync(decrementCount))
+        setDecrementAmount('')
     }
 
     return (
         <div>
             <div>
-                <button
-                    aria-label='Async add a number'
-                    onClick={handleIncrement}
-                >
-                    Асинхронно добавить число из инпута
-                </button>
-                <button
-                    aria-label='Async subtract a number'
-                    onClick={handleDecrement}
-                >
-                    Асинхронно отнять число из инпута
-                </button>
                 <button
                     aria-label='Increment value' 
                     onClick={() => dispatch(increment())}
@@ -47,12 +38,33 @@ export const Counter = () => {
                     Отнять 1
                 </button>
             </div>
+            <br />
             <div>
                 <input
                     type="number"
                     value={incrementAmount}
                     onChange={(e) => setIncrementAmount(e.target.value)}
                 />
+                <button
+                    aria-label='Async add a number'
+                    onClick={handleIncrement}
+                >
+                    Асинхронно добавить число из инпута
+                </button>
+            </div>
+            <br />
+            <div>
+                <input
+                    type="number"
+                    value={decrementAmount}
+                    onChange={(e) => setDecrementAmount(e.target.value)}
+                />
+                <button
+                    aria-label='Async subtract a number'
+                    onClick={handleDecrement}
+                >
+                    Асинхронно отнять число из инпута
+                </button>
             </div>
         </div>
     )
