@@ -11,12 +11,14 @@ export const Counter = () => {
 
     const handleIncrement = () => {
         const incrementCount = Number(incrementAmount)
+
         dispatch(incrementAsync(incrementCount))
         setIncrementAmount('')
     }
 
     const handleDecrement = () => {
         const decrementCount = Number(decrementAmount)
+        
         dispatch(decrementAsync(decrementCount))
         setDecrementAmount('')
     }
