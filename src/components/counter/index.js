@@ -1,16 +1,38 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment, incrementByAmount } from '../../slices/counter/counterSlice';
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment, incrementAsync, decrementAsync } from '../../slices/counter/index'
 
 export const Counter = () => {
-    const count = useSelector((state) => state.counter.value);
-    const dispatch = useDispatch();
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
 
-    const [incrementAmount, setIncrementAmount] = useState(0);
+    const [incrementAmount, setIncrementAmount] = useState('')
+
+    const handleIncrement = () => {
+        const amount = Number(incrementAmount)
+        dispatch(incrementAsync(amount))
+    }
+
+    const handleDecrement = () => {
+        const amount = Number(incrementAmount)
+        dispatch(decrementAsync(amount))
+    }
 
     return (
         <div>
             <div>
+                <button
+                    aria-label='Async add a number'
+                    onClick={handleIncrement}
+                >
+                    Асинхронно добавить число из инпута
+                </button>
+                <button
+                    aria-label='Async subtract a number'
+                    onClick={handleDecrement}
+                >
+                    Асинхронно отнять число из инпута
+                </button>
                 <button
                     aria-label='Increment value' 
                     onClick={() => dispatch(increment())}
@@ -29,15 +51,9 @@ export const Counter = () => {
                 <input
                     type="number"
                     value={incrementAmount}
-                    onChange={(e) => setIncrementAmount(Number(e.target.value))}
+                    onChange={(e) => setIncrementAmount(e.target.value)}
                 />
-                <button
-                    aria-label='Increment by amount'
-                    onClick={() => dispatch(incrementByAmount(incrementAmount))}
-                >
-                    Добавить введённое в инпут значение
-                </button>
             </div>
         </div>
-    );
-};
+    )
+}

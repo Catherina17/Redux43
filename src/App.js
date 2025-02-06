@@ -1,5 +1,4 @@
-import { Counter } from './components/counter';
-import { Users } from './components/users/users';
+import { Counter } from './components/counter/index';
 import './App.css';
 
 
@@ -7,7 +6,6 @@ function App() {
   return (
     <div className="App">
       <Counter />
-      <Users />
     </div>
   );
 }
